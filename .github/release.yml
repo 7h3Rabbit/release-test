@@ -1,0 +1,49 @@
+# .github/release.yml
+# https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - documentation
+    authors:
+      - octocat
+  categories:
+    - title: Breaking Changes 🛠
+      labels:
+        - Semver-Major
+        - breaking-change
+    - title: Exciting New Features 🎉
+      labels:
+        - Semver-Minor
+        - enhancement
+    - title: Bug Fixes
+      labels:
+        - bug
+    - title: Other Changes
+      labels:
+        - "*"
+
+
+
+# Do we want a new release?
+# - Check if any valid changes has been done
+#   - HOW do we see changes that has been made?
+#   - What is a valid change?
+#     - *.py files that is not in .github folder
+#     - *.cjs files that are not in data folder
+#     - software-full.json
+#     - requirements.txt
+#     - package.json
+# - What MUST be done for a release?
+#   - Update webperf-core version in package.json
+#   - Create release notes
+#   - Create release tag
+#   - Create release zip files
+#   - Create GitHub release
+# - What SHOULD be done for a release?
+#   - Create Docker release
+# - What version should it be?
+#   - Major = <year>
+#   - Minor = <month>
+#   - Patch = <0 or 1 more than the newest this month>
