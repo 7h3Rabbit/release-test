@@ -18,10 +18,10 @@ jobs:
         run: pip install -r requirements.txt
       - name: 📋 Get Commits since last Release
         id: changes
-        uses: simbo/changes-since-last-release-action@v1
-          with:
-            line-prefix: "* "
-            include-hashes: false
+        uses: simbo/changes-since-last-release-action@v1.0.1
+        with:
+          line-prefix: "* "
+          include-hashes: false
       - name: Setup config (using SAMPLE-config.py as config.py)
         id: newversion
         run: |
