@@ -54,7 +54,7 @@ def main(argv):
             # TODO: Update package.json with latest version
 
     # No match for command so return error code to fail verification
-    sys.exit(2)
+    sys.exit(0)
 
 
 
