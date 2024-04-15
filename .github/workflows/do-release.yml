@@ -30,6 +30,6 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: "${{ steps.newversion.outputs.YOUR_VARIABLE }}"
+          tag_name: "${{ steps.newversion.outputs.NEW_VERSION }}"
           make_latest: "true"
           generate_release_notes: true
