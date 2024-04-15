@@ -22,7 +22,7 @@ jobs:
         with:
           line-prefix: "* "
           include-hashes: false
-      - name: Setup config (using SAMPLE-config.py as config.py)
+      - name: Generate new release  version
         id: newversion
         run: python release.py -l "${{ steps.changes.outputs.last-tag }}"
       - name: Release
