@@ -1,0 +1,12 @@
+{
+    "loaded": true,
+    "aliases": {
+        "angularjs": "angular.js"
+    },
+    "softwares": {
+        "?": {
+            "custom": true
+        }
+    },
+    "updated": "2024-04-14 11:30:51"
+}
