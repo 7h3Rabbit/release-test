@@ -24,12 +24,10 @@ jobs:
           include-hashes: false
       - name: Setup config (using SAMPLE-config.py as config.py)
         id: newversion
-        run: |
-          NEW_VERSION=$(python release.py -l "${{ steps.changes.outputs.last-tag }}")
-          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_OUTPUT
+        run: python release.py -l "${{ steps.changes.outputs.last-tag }}"
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: "${{ steps.newversion.outputs.NEW_VERSION }}"
+          tag_name: "${{ env.NEW_VERSION }}"
           make_latest: "true"
           generate_release_notes: true

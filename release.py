@@ -1,7 +1,26 @@
+import os
 import getopt
 import sys
 import packaging.version
 from datetime import datetime
+
+def get_new_version(last_version):
+    print('last_version', last_version)
+    new_version = packaging.version.Version(f"{datetime.now().year}.{datetime.now().month}.0")
+    if new_version <= last_version:
+        if last_version.major != new_version.major:
+            print('major new_version', new_version)
+            return new_version
+        if last_version.minor != new_version.minor:
+            print('minor new_version', new_version)
+            return new_version
+
+        new_version = packaging.version.Version(f"{new_version.major}.{new_version.minor}.{(last_version.micro + 1)}")
+
+        print('micro new_version', new_version)
+    else:
+        print('new_version', new_version)
+    return new_version
 
 def main(argv):
     """
@@ -24,21 +43,12 @@ def main(argv):
             sys.exit(0)
         elif opt in ("-l", "--last"):
             last_version = packaging.version.Version(arg)
-            print('last_version', last_version)
-            new_version = packaging.version.Version(f"{datetime.now().year}.{datetime.now().month}.0")
-            if new_version <= last_version:
-                if last_version.major != new_version.major:
-                    print('major new_version', new_version)
-                    return new_version
-                if last_version.minor != new_version.minor:
-                    print('minor new_version', new_version)
-                    return new_version
-                
-                new_version = packaging.version.Version(f"{new_version.major}.{new_version.minor}.{(last_version.micro + 1)}")
+            new_version= get_new_version(last_version)
 
-                print('micro new_version', new_version)
-            else:
-                print('new_version', new_version)
+            env_file = os.getenv('GITHUB_ENV')
+            with open(env_file, "a") as myfile:
+                myfile.write(f"NEW_VERSION={new_version}")
+
         elif opt in ("-u", "--update"):
             a = 2
             # TODO: Update package.json with latest version
