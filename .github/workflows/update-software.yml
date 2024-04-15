@@ -1,0 +1,39 @@
+name: "Software - Update version and security info"
+on:
+  schedule:
+  #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
+  #  * is a special character in YAML so you have to quote this string
+    - cron: '30 8 16,17,18 * *'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+            matrix:
+                os: [windows-latest]
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+    - name: Setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+    - name: Setup dependencies using pip
+      run: pip install -r requirements.txt
+    - name: Verifing Software(s)
+      run: python update_software.py
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        commit-message: Update software and license definitions
+        branch: software-definition-updates
+        title: Scheduled Software Definition Update
+        body: |
+          This pull request is used to make it easier to keep the software definitions up to date.
+          
+          Following files may be touched:
+            - software-full.json
+        assignees: 7h3Rabbit
+        reviewers: 7h3Rabbit
+        add-paths: |
+          software-full.json
