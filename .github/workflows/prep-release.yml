@@ -5,10 +5,9 @@ on:
     branches:
       - main
     paths:
-      - "package.json"
-      #- "software-full.json"
-      #- "release.py"
-      #- "**do-release.yml"
+      - "software-full.json"
+      - "release.py"
+      - "**prep-release.yml"
   schedule:
     #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
     #  * is a special character in YAML so you have to quote this string
@@ -36,10 +35,18 @@ jobs:
           include-hashes: false
       - name: Generate new release version
         id: newversion
-        run: python release.py -l "${{ steps.changes.outputs.last-tag }}"
-      - name: Release
-        uses: softprops/action-gh-release@v2
+        run: python release.py -u "${{ steps.changes.outputs.last-tag }}"
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
         with:
-          tag_name: "${{ env.NEW_VERSION }}"
-          make_latest: "true"
-          generate_release_notes: true
+          commit-message: Updated version in package.json to latest
+          branch: update-version-in-package-json
+          title: Updated version in package.json to latest
+          body: |
+            This pull request is used to prepare and initiate a release.
+            It will change version in package.json,
+            that will trigger the do-release GitHub Action.
+          assignees: 7h3Rabbit
+          reviewers: 7h3Rabbit
+          add-paths: |
+            package.json

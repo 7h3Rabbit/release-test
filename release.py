@@ -1,3 +1,4 @@
+import json
 import os
 import getopt
 import sys
@@ -45,13 +46,35 @@ def main(argv):
             last_version = packaging.version.Version(arg)
             new_version= get_new_version(last_version)
 
+            current_version = None
+            with open('package.json', encoding='utf-8') as json_input_file:
+                package_info = json.load(json_input_file)
+                if 'version' in package_info:
+                    current_version = packaging.version.Version(package_info['version'])
+
+            if current_version != last_version:
+                raise ValueError((
+                    'last and current version(s) do not match'
+                    f'last version={last_version}',
+                    f'package.json version={current_version}'
+                    ))
+
             env_file = os.getenv('GITHUB_ENV')
             with open(env_file, "a") as myfile:
                 myfile.write(f"NEW_VERSION={new_version}")
 
         elif opt in ("-u", "--update"):
-            a = 2
-            # TODO: Update package.json with latest version
+            last_version = packaging.version.Version(arg)
+            new_version= get_new_version(last_version)
+            package_info = None
+
+            with open('package.json', encoding='utf-8') as json_input_file:
+                package_info = json.load(json_input_file)
+                package_info['version'] = f'{new_version}'
+
+            with open('package.json', 'w', encoding='utf-8') as json_output_file:
+                json.dump(package_info, json_output_file, indent=2)
+
 
     # No match for command so return error code to fail verification
     sys.exit(0)
