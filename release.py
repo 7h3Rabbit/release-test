@@ -52,10 +52,10 @@ def main(argv):
                 if 'version' in package_info:
                     current_version = packaging.version.Version(package_info['version'])
 
-            if current_version != last_version:
+            if current_version != new_version:
                 raise ValueError((
                     'last and current version(s) do not match'
-                    f'last version={last_version}',
+                    f'new version={new_version}',
                     f'package.json version={current_version}'
                     ))
 
