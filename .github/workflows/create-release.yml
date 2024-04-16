@@ -1,14 +1,11 @@
 # https://github.com/softprops/action-gh-release
-name: Do Release
+name: Create Release
 on:
   push:
     branches:
       - main
     paths:
       - "package.json"
-      #- "software-full.json"
-      #- "release.py"
-      #- "**do-release.yml"
   schedule:
     #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
     #  * is a special character in YAML so you have to quote this string

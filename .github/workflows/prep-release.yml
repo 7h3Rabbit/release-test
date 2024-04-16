@@ -1,5 +1,5 @@
 # https://github.com/softprops/action-gh-release
-name: Do Release
+name: Prep Release
 on:
   push:
     branches:
@@ -7,6 +7,7 @@ on:
     paths:
       - "software-full.json"
       - "release.py"
+      - "**create-release.yml"
       - "**prep-release.yml"
   schedule:
     #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
