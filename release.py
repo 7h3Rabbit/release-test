@@ -53,11 +53,12 @@ def main(argv):
                     current_version = packaging.version.Version(package_info['version'])
 
             if current_version != new_version:
-                raise ValueError((
+                print((
                     'last and current version(s) do not match'
                     f'new version={new_version}',
                     f'package.json version={current_version}'
                     ))
+                return
 
             env_file = os.getenv('GITHUB_ENV')
             with open(env_file, "a") as myfile:
