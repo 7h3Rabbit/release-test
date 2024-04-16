@@ -2,6 +2,8 @@
 name: Do Release
 on:
   push:
+    branches:
+      - main
     paths:
       - "package.json"
       - "software-full.json"
