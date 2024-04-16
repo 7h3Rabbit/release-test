@@ -1,6 +1,6 @@
 {
   "name": "release",
-  "version": "2024.4.0",
+  "version": "2024.4.8",
   "description": "1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,7 @@
     "sitespeed.io": "33.5.0",
     "yellowlabtools": "3.0.1"
   },
-  "engines": { "node": "20.x"}
+  "engines": {
+    "node": "20.x"
+  }
 }
