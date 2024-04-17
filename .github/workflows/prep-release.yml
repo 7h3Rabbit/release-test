@@ -6,13 +6,10 @@ on:
       - main
     paths:
       - "software-full.json"
-      - "release.py"
-      - "**create-release.yml"
-      - "**prep-release.yml"
   schedule:
     #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
     #  * is a special character in YAML so you have to quote this string
-    - cron: "30 8 1,17 * *"
+    - cron: "30 11 1,17 * *"
 jobs:
   build:
     runs-on: ubuntu-latest
