@@ -33,6 +33,7 @@ jobs:
           
           Following files may be touched:
             - software-full.json
+        committer: software-updater[bot] <41898282+software-updater[bot]@users.noreply.github.com>
         assignees: 7h3Rabbit
         reviewers: 7h3Rabbit
         add-paths: |
