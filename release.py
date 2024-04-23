@@ -66,11 +66,14 @@ def main(argv):
 
         elif opt in ("-u", "--update"):
             last_version = packaging.version.Version(arg)
-            new_version= get_new_version(last_version)
             package_info = None
 
             with open('package.json', encoding='utf-8') as json_input_file:
                 package_info = json.load(json_input_file)
+                package_version = packaging.version.Version(package_info['version'])
+                if package_version > last_version:
+                    last_version = package_version
+                new_version= get_new_version(last_version)
                 package_info['version'] = f'{new_version}'
 
             with open('package.json', 'w', encoding='utf-8') as json_output_file:
