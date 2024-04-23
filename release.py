@@ -76,6 +76,10 @@ def main(argv):
             with open('package.json', 'w', encoding='utf-8') as json_output_file:
                 json.dump(package_info, json_output_file, indent=2)
 
+            env_file = os.getenv('GITHUB_ENV')
+            with open(env_file, "a") as myfile:
+                myfile.write(f"NEW_VERSION={new_version}")
+
 
     # No match for command so return error code to fail verification
     sys.exit(0)

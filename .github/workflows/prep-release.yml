@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - "software-full.json"
+      - "Dockerfile"
   schedule:
     #  https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#onschedule
     #  * is a special character in YAML so you have to quote this string
@@ -40,7 +41,7 @@ jobs:
         with:
           commit-message: Updated version in package.json to latest
           branch: update-version-in-package-json
-          title: Updated version in package.json to latest
+          title: "Prepare release - WebPerf_Core v${{ env.NEW_VERSION }}"
           body: |
             This pull request is used to prepare and initiate a release.
             It will change version in package.json,
