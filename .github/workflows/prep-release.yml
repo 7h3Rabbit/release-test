@@ -41,7 +41,7 @@ jobs:
         with:
           commit-message: Updated version in package.json to latest
           branch: update-version-in-package-json
-          title: Prepare release
+          title: Prepare release - WebPerf_Core v${{ env.NEW_VERSION }}
           body: |
             This pull request is used to prepare and initiate a release.
             It will change version in package.json,
