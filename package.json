@@ -1,6 +1,6 @@
 {
   "name": "release",
-  "version": "2024.4.17",
+  "version": "2024.4.18",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
