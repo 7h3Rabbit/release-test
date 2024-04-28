@@ -46,6 +46,8 @@ jobs:
             This pull request is used to prepare and initiate a release.
             It will change version in package.json,
             that will trigger the do-release GitHub Action.
+
+            ${{ steps.changes.outputs.log }}
           assignees: 7h3Rabbit
           reviewers: 7h3Rabbit
           add-paths: |
